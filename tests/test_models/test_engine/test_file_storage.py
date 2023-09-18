@@ -1,9 +1,12 @@
 #!/usr/bin/python3
 """ Module for testing file storage"""
+from io import StringIO
 import unittest
+from unittest.mock import patch
 from models.base_model import BaseModel
 from models import storage
 import os
+from console import HBNBCommand
 
 
 class test_fileStorage(unittest.TestCase):
@@ -107,3 +110,20 @@ class test_fileStorage(unittest.TestCase):
         from models.engine.file_storage import FileStorage
         print(type(storage))
         self.assertEqual(type(storage), FileStorage)
+
+    def test_updatedcreate(self):
+        "Tests the updated create method"
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create")
+            self.assertEqual(
+                f.getvalue(), "** class name missing **\n")
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create myname")
+            self.assertEqual(
+                f.getvalue(), "** class doesn't exist **\n")
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('create State name="Arizona"')
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("all State")
+            self.assertEqual(
+                "[\"[State]", f.getvalue()[:9])
