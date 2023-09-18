@@ -120,6 +120,8 @@ class HBNBCommand(cmd.Cmd):
             if not args:
                 raise SyntaxError()
             args_list = args.split(" ")
+            if args_list[0] not in HBNBCommand.classes:
+                raise NameError()
             new_instance = eval("{}()".format(args_list[0]))
             print("{}".format(new_instance.id))
             for index in range(1, len(args_list)):
