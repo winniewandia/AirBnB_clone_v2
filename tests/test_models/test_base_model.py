@@ -94,9 +94,7 @@ class test_basemodel(unittest.TestCase):
     def test_updated_at(self):
         """ """
         new = self.value()
-        print(new.created_at)
         self.assertEqual(type(new.updated_at), datetime.datetime)
         n = new.to_dict()
         new = BaseModel(**n)
-        print(new.created_at)
         self.assertFalse(new.created_at == new.updated_at)
