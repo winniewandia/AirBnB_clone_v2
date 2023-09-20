@@ -39,15 +39,14 @@ class DBStorage:
 
     def all(self, cls=None):
         """returns a dict of objs"""
-        if not self.__session:
-            self.reload()
         objs = {}
-        if type(cls) == str:
-            cls = classes.get(cls, None)
         if cls is not None:
-            for obj in self.__session.query(cls):
-                key = obj.__class__.__name__ + '.' + obj.id
-                objs[key] = obj
+            if type(cls) is str:
+                cls = eval(cls)
+            query = self.__session.query(cls)
+            for result in query:
+                key = "{}.{}".format(type(result).__name__, result.id)
+                objs[key] = result
         else:
             for cls in classes.values():
                 for obj in self.__session.query(cls):
@@ -57,9 +56,10 @@ class DBStorage:
 
     def reload(self):
         """reloads objs"""
-        Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Base.metadata.create_all(self.__engine)
-        self.__session = scoped_session(Session)
+        Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        Sec = scoped_session(Session)
+        self.__session = Sec()
 
     def new(self, obj):
         """creates a new object"""
@@ -71,7 +71,5 @@ class DBStorage:
 
     def delete(self, obj=None):
         """deletes an obj"""
-        if not self.__session:
-            self.reload()
         if obj:
             self.__session.delete(obj)

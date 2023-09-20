@@ -9,20 +9,22 @@ from os import getenv
 
 class State(BaseModel, Base):
     """ State class """
-    if getenv('HBNB_TYPE_STORAGE') == 'db':
-        __tablename__ = 'states'
-        name = Column(String(128), nullable=False, primary_key=True)
-        cities = relationship("City", backref='state', cascade="all, delete")
-    else:
-        name = ''
+    __tablename__ = 'states'
+    name = Column(String(128), nullable=False)
+    cities = relationship("City", backref='state', cascade="all, delete")
 
-    if getenv('HBNB_TYPE_STORAGE') != 'db':
-        @property
-        def cities(self):
-            """getter attribute that returns City instances"""
-            values_city = models.storage.all("City").values()
-            list_city = []
-            for city in values_city:
-                if city.state_id == self.id:
-                    list_city.append(city)
-            return list_city
+    @property
+    def cities(self):
+        """getter attribute that returns City instances"""
+        values_city = models.storage.all()
+        list_city = []
+        list_val = []
+        for key in values_city:
+            city = key.replace('.', ' ')
+            city = shlex.split(city)
+            if (city[0] == 'City'):
+                 list_val.append(values_city[key])
+        for value in list_val:
+            if (value.state_id == self.id):
+                list_city.append(value)
+        return list_city
