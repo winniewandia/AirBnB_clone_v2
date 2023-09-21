@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/Library/Frameworks/Python.framework/Versions/3.11/bin/python3
 """ Console Module """
 import cmd
 import sys

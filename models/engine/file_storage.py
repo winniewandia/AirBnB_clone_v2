@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/Library/Frameworks/Python.framework/Versions/3.11/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
 import json
 import shlex

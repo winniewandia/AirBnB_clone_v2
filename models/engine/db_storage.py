@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/Library/Frameworks/Python.framework/Versions/3.11/bin/python3
 """Database storage"""
 from os import getenv
 from sqlalchemy import create_engine
@@ -32,15 +32,15 @@ class DBStorage:
         db_host = getenv('HBNB_MYSQL_HOST')
         db = getenv('HBNB_MYSQL_DB')
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'
-				      .format(db_user, db_passwd, db_host, db),
-				      pool_pre_ping=True)
+                                      .format(db_user, db_passwd, db_host, db),
+                                      pool_pre_ping=True)
         if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """returns a dict of objs"""
         objs = {}
-        if cls is not None:
+        if cls:
             if type(cls) is str:
                 cls = eval(cls)
             query = self.__session.query(cls)

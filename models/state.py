@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/Library/Frameworks/Python.framework/Versions/3.11/bin/python3
 """ State Module for HBNB project """
 from models.base_model import BaseModel
 from models.base_model import Base
@@ -23,7 +23,7 @@ class State(BaseModel, Base):
             city = key.replace('.', ' ')
             city = shlex.split(city)
             if (city[0] == 'City'):
-                 list_val.append(values_city[key])
+                list_val.append(values_city[key])
         for value in list_val:
             if (value.state_id == self.id):
                 list_city.append(value)
