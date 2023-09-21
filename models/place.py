@@ -1,4 +1,4 @@
-#!/Library/Frameworks/Python.framework/Versions/3.11/bin/python3
+#!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel
 from models.base_model import Base
@@ -21,13 +21,13 @@ class Place(BaseModel, Base):
     city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     name = Column(String(128), nullable=False)
-    description = Column(String(1024), nullable=False)
+    description = Column(String(1024), nullable=True)
     number_rooms = Column(Integer, default=0, nullable=False)
     number_bathrooms = Column(Integer, default=0, nullable=False)
     max_guest = Column(Integer, default=0, nullable=False)
     price_by_night = Column(Integer, default=0, nullable=False)
-    latitude = Column(Float, nullable=False)
-    longitude = Column(Float, nullable=False)
+    latitude = Column(Float, nullable=True)
+    longitude = Column(Float, nullable=True)
     amenity_ids = []
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
@@ -40,7 +40,8 @@ class Place(BaseModel, Base):
         @property
         def reviews(self):
             """attribute that returns list of Review instances"""
-            values_review = models.storage.all("Review").values()
+            from models.review import Review
+            values_review = models.storage.all(Review).values()
             list_review = []
             for review in values_review:
                 if review.place_id == self.id:
@@ -54,9 +55,9 @@ class Place(BaseModel, Base):
             values_amenity = models.storage.all(Amenity).values()
             list_amenity = []
             for amenity in values_amenity:
-                # if amenity.place_id == self.id:
-                if amenity.id in self.amenity_ids:
-                    list_amenity.append(amenity)
+                if amenity.place_id == self.id:
+                    if amenity.id in self.amenity_ids:
+                        list_amenity.append(amenity)
             return list_amenity
 
         @amenities.setter

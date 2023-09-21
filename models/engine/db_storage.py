@@ -1,4 +1,4 @@
-#!/Library/Frameworks/Python.framework/Versions/3.11/bin/python3
+#!/usr/bin/python3
 """Database storage"""
 from os import getenv
 from sqlalchemy import create_engine
