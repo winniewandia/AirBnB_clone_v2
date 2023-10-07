@@ -3,7 +3,7 @@
 """
 import os
 import shlex
-from fabric.api import run, put, sudo, env
+from fabric.api import run, put, env
 
 env.hosts = ['54.161.254.60', '54.167.200.160']
 env.user = 'ubuntu'
