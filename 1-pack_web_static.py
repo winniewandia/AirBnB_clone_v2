@@ -1,7 +1,7 @@
-#!/usr/bin/python3
+#!/usr/bin/env bash
 """Compress before sending
 """
-from fabric.api import local
+from fabric.api import *
 from datetime import datetime
 
 
