@@ -5,7 +5,7 @@ import os
 import shlex
 from fabric.api import run, put, env
 
-env.hosts = ['54.161.254.60', '54.167.200.160']
+env.hosts = ['3.80.18.129', '100.25.130.218']
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/id_rsa'
 
