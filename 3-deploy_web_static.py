@@ -7,7 +7,7 @@ import os
 import shlex
 
 
-env.hosts = ['107.23.108.17', '54.159.22.170']
+env.hosts = ['107.23.108.17', '54.173.67.231']
 
 
 def deploy():
