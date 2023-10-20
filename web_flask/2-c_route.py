@@ -34,7 +34,7 @@ def c_text(text):
     Returns:
         web application
     """
-    return f'C {escape(text)}'
+    return 'C %s' % text.replace('_', ' ')
 
 
 if __name__ == "__main__":
