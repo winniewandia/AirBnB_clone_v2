@@ -11,14 +11,14 @@ app = Flask(__name__)
 
 @app.teardown_appcontext
 def teardown(exception):
-    """Teardown
+    """Teardown to remove the current SQLAlchemy Session
     """
     storage.close()
 
 
 @app.route('/states_list', strict_slashes=False)
 def html():
-    """Displays html
+    """Displays html page
 
     Returns:
         html
