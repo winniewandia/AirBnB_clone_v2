@@ -10,7 +10,7 @@ from models.state import State
 from models.review import Review
 from models.user import User
 from sqlalchemy.orm import sessionmaker, scoped_session
-import mysql.connector
+
 classes = {
     'Amenity': Amenity,
     'City': City,
