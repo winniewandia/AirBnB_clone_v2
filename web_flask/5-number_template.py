@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-"""A script that starts a Flask web application and has 5 routes
+"""A script that starts a Flask web application and has 6 routes
+and renders a template
 """
 from markupsafe import escape
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -62,6 +63,20 @@ def number(n):
         web application
     """
     return f'{n} is a number'
+
+
+# @app.route('/number_template/', strict_slashes=False)
+@app.route('/number_template/<int:n>', strict_slashes=False)
+def number_template(n):
+    """route that displays HTML only if n is int
+
+    Args:
+        n (int): int to be displayed
+
+    Returns:
+        HTML: html page
+    """
+    return render_template('5-number.html', n=n)
 
 
 if __name__ == "__main__":
