@@ -8,3 +8,5 @@
 7. updating the engine
 8. starting a flask web app and declaring the method @app.teardown_appcontext
 9. Cities by states
+10. States and state
+11. HBNB filters

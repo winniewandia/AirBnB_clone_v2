@@ -5,7 +5,7 @@ handles @app.teardown_appcontext
 from flask import Flask, render_template
 from models import storage
 from models.state import State
-from models.city import City
+from models.amenity import Amenity
 
 app = Flask(__name__)
 
@@ -17,7 +17,7 @@ def teardown(exception):
     storage.close()
 
 
-@app.route('/cities_by_states', strict_slashes=False)
+@app.route('/hbnb_filters/', strict_slashes=False)
 def html_display():
     """Displays html page
 
@@ -25,8 +25,9 @@ def html_display():
         html
     """
     states = storage.all(State)
-    return render_template('8-cities_by_states.html',
-                           Table="States", states=states)
+    amenities = storage.all(Amenity)
+    return render_template('10-hbnb_filters.html',
+                           states=states.values(), amenities=amenities.values())
 
 
 if __name__ == '__main__':
