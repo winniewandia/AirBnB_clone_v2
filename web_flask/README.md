@@ -7,3 +7,4 @@
 6. Route displays html depending on whether a var is odd or even
 7. updating the engine
 8. starting a flask web app and declaring the method @app.teardown_appcontext
+9. Cities by states
